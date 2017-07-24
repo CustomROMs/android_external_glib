@@ -97,7 +97,7 @@ LOCAL_SRC_FILES:= \
 	gqsort.c \
 	libcharset/localcharset.c \
 
-LOCAL_C_INCLUDES:= $(LOCAL_PATH)/../ $(LOCAL_PATH) $(call include-path-for, libiconv)
+LOCAL_C_INCLUDES:= $(LOCAL_PATH)/../ $(LOCAL_PATH) external/libiconv/include
 
 LOCAL_CFLAGS:= \
 	-DANDROID_STUB \
