@@ -555,6 +555,7 @@ g_option_context_get_main_group (GOptionContext *context)
   return context->main_group;
 }
 
+#ifdef HAVE_GETTEXT
 /**
  * g_option_context_add_main_entries:
  * @context: a #GOptionContext
@@ -581,6 +582,7 @@ g_option_context_add_main_entries (GOptionContext      *context,
   g_option_group_add_entries (context->main_group, entries);
   g_option_group_set_translation_domain (context->main_group, translation_domain);
 }
+#endif
 
 static gint
 calculate_max_length (GOptionGroup *group)
@@ -2288,6 +2290,7 @@ g_option_group_set_translate_func (GOptionGroup   *group,
   group->translate_notify = destroy_notify;
 }
 
+#ifdef HAVE_GETTEXT
 static const gchar *
 dgettext_swapped (const gchar *msgid,
                   const gchar *domainname)
@@ -2316,6 +2319,7 @@ g_option_group_set_translation_domain (GOptionGroup *group,
                                      g_strdup (domain),
                                      g_free);
 }
+#endif
 
 /**
  * g_option_context_set_translate_func:
@@ -2354,6 +2358,7 @@ g_option_context_set_translate_func (GOptionContext *context,
   context->translate_notify = destroy_notify;
 }
 
+#ifdef HAVE_GETTEXT
 /**
  * g_option_context_set_translation_domain:
  * @context: a #GOptionContext
@@ -2375,6 +2380,7 @@ g_option_context_set_translation_domain (GOptionContext *context,
                                        g_strdup (domain),
                                        g_free);
 }
+#endif
 
 /**
  * g_option_context_set_summary:

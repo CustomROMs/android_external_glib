@@ -21,6 +21,7 @@ TAGS
 # autofoo stuff here
 compile
 config.*
+!config.h
 configure
 depcomp
 aclocal.m4

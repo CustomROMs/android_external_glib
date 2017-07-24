@@ -813,16 +813,19 @@ g_get_any_init_do (void)
     while (!pw);
 #  endif /* HAVE_POSIX_GETPWUID_R || HAVE_NONPOSIX_GETPWUID_R */
     
+#if !defined(__ANDROID__)
     if (!pw)
       {
 	setpwent ();
 	pw = getpwuid (getuid ());
 	endpwent ();
       }
+#endif
     if (pw)
       {
 	g_user_name = g_strdup (pw->pw_name);
 
+#if !defined(__ANDROID__) || defined(__LP64__)
 	if (pw->pw_gecos && *pw->pw_gecos != '\0') 
 	  {
 	    gchar **gecos_fields;
@@ -836,6 +839,7 @@ g_get_any_init_do (void)
 	    g_strfreev (gecos_fields);
 	    g_strfreev (name_parts);
 	  }
+#endif
 
 	if (!g_home_dir)
 	  g_home_dir = g_strdup (pw->pw_dir);
@@ -2081,6 +2085,7 @@ g_nullify_pointer (gpointer *nullify_location)
   *nullify_location = NULL;
 }
 
+#ifdef HAVE_GETTEXT
 #define KILOBYTE_FACTOR (G_GOFFSET_CONSTANT (1000))
 #define MEGABYTE_FACTOR (KILOBYTE_FACTOR * KILOBYTE_FACTOR)
 #define GIGABYTE_FACTOR (MEGABYTE_FACTOR * KILOBYTE_FACTOR)
@@ -2331,6 +2336,7 @@ g_format_size_for_display (goffset size)
         }
     }
 }
+#endif
 
 #if defined (G_OS_WIN32) && !defined (_WIN64)
 
