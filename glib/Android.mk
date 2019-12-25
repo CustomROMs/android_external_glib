@@ -5,6 +5,8 @@ include $(CLEAR_VARS)
 # (unfortunately I lost my original contents of android.cache, but they were for a few of the tests that can't be run
 # when cross-compiling)
 
+#	gregex.c \
+
 LOCAL_SRC_FILES:= \
 	garray.c \
 	gmain.c \
@@ -56,7 +58,6 @@ LOCAL_SRC_FILES:= \
 	gcharset.c \
 	gstdio.c \
 	genviron.c \
-	gregex.c \
 	gbytes.c \
 	gdataset.c \
 	giounix.c \
@@ -100,12 +101,13 @@ LOCAL_SRC_FILES:= \
 LOCAL_C_INCLUDES:= $(LOCAL_PATH)/../ $(LOCAL_PATH)
 
 LOCAL_CFLAGS:= \
+        -Wno-error \
 	-DANDROID_STUB \
 	-DGLIB_COMPILATION \
 	-DLIBICONV_PLUG \
 	-DLIBDIR=\"/\"
 
-LOCAL_SHARED_LIBRARIES := libiconv libpcre
+LOCAL_SHARED_LIBRARIES := libiconv libpcre2
 
 LOCAL_MODULE:=libglib
 

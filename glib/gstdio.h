@@ -23,6 +23,7 @@
 
 #include <glib/gprintf.h>
 
+#include <fcntl.h>
 #include <sys/stat.h>
 
 G_BEGIN_DECLS
@@ -62,7 +63,10 @@ typedef struct stat GStatBuf;
 
 #ifndef __GTK_DOC_IGNORE__
 #define g_chmod   chmod
-#define g_open    open
+static int g_open(const char* pathname, int flags, mode_t modes __unused) {
+    return open(pathname, flags);
+}
+
 #define g_creat   creat
 #define g_rename  rename
 #define g_mkdir   mkdir
